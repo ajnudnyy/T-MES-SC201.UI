@@ -152,8 +152,8 @@ export default class App extends Component {
                       key="1"
                       title={
                         <span>
-                          <Icon type="user" />
-                          <span>设备管理</span>
+                          <Icon type="laptop" />
+                          <span>机台监控</span>
                         </span>}>
                       <Menu.Item key="6">
                         <Link to={'/Feature1-5'}>
@@ -168,30 +168,102 @@ export default class App extends Component {
                         </Link>
                       </Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="2">
-                      <Link to={'/Feature1-1'}>
-                       <Icon type="home" className="icons"/>
-                       <span>工程管理</span>
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                      <Link to={'/Feature5-2'}>
-                       <Icon type="appstore-o" className="icons"/>
-                       <span>我的应用</span>
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item key="4">
-                      <Link to={'/Feature3-1'}>
-                       <Icon type="user" />
-                       <span>客户管理</span>
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item key="5">
-                      <Link to={'/Feature4-1'}>
-                       <Icon type="setting" className="icons"/>
-                       <span>订单管理</span>
-                      </Link>
-                    </Menu.Item>
+                    <SubMenu
+                      key="2"
+                      title={
+                        <span>
+                          <Icon type="idcard" />
+                          <span>生产管理</span>
+                        </span>}>
+                        <Menu.Item key="2-1">
+                          <Link to={'/Feature4-1'}>
+                          <Icon type="file-text" className="icons"/>
+                          <span>订单管理</span>
+                          </Link>
+                        </Menu.Item>
+                        <Menu.Item key="2-2">
+                          <Link to={'/Feature4-1'}>
+                          <Icon type="file-excel" className="icons"/>
+                          <span>生产排程</span>
+                          </Link>
+                        </Menu.Item>
+                        <Menu.Item key="2-3">
+                          <Link to={'/Feature4-1'}>
+                          <Icon type="file-text" className="icons"/>
+                          <span>生产任务</span>
+                          </Link>
+                        </Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                      key="3"
+                      title={
+                        <span>
+                          <Icon type="bar-chart" />
+                          <span>基础数据</span>
+                        </span>}>
+                      <Menu.Item key="3-1">
+                        <Link to={'/Feature1-5'}>
+                         <Icon type="menu-fold" className="icons"/>
+                         <span>机台群览</span>
+                        </Link>
+                      </Menu.Item>
+                      <Menu.Item key="3-2">
+                        <Link to={'/Feature1-6'}>
+                          <Icon type="search" className="icons"/>
+                          <span>机台详情</span>
+                        </Link>
+                      </Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                      key="4"
+                      title={
+                        <span>
+                          <Icon type="pie-chart" />
+                          <span>报表中心</span>
+                        </span>}>
+                        <Menu.Item key="4-1">
+                          <Link to={'/Feature1-1'}>
+                          <Icon type="home" className="icons"/>
+                          <span>工程管理</span>
+                          </Link>
+                        </Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                      key="5"
+                      title={
+                        <span>
+                          <Icon type="tablet" />
+                          <span>看板中心</span>
+                        </span>}>
+                        <Menu.Item key="5-1">
+                          <Link to={'/Feature5-2'}>
+                          <Icon type="appstore-o" className="icons"/>
+                          <span>我的应用</span>
+                          </Link>
+                        </Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                      key="6"
+                      title={
+                        <span>
+                          <Icon type="setting" />
+                          <span>系统设置</span>
+                        </span>}>
+                        <Menu.Item key="6-1">
+                          <Link to={'/Feature5-2'}>
+                          <Icon type="appstore-o" className="icons"/>
+                          <span>我的应用</span>
+                          </Link>
+                        </Menu.Item>
+                        <Menu.Item key="6-2">
+                          <Link to={'/Feature3-1'}>
+                          <Icon type="user" />
+                          <span>客户管理</span>
+                          </Link>
+                        </Menu.Item>
+                    </SubMenu>
+                    
+                    
                   </Menu>
                 </Sider>
                 <Layout style={{ backgroundColor: '#f0f2f5' }}>
