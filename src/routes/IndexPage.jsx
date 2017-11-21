@@ -2,28 +2,34 @@ import React, {
   Component
 } from 'react'
 import ReactDom from 'react-dom';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon,Breadcrumb } from 'antd';
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import config from '../config';
+
+/* import config from '../config';
 import Header from '../components/header/Header';
 import SubSider from '../components/sider/Sider';
 import Main from '../components/main/Main';
 import Footer from '../components/footer/Footer';
-import Login from '../components/login/Login';
+import Login from '../components/login/Login'; */
 let seft
+import config from '../config';
+import Header from 'components/header/Header';
+import SubSider from 'components/sider/Sider';
+import Main from 'components/main/Main';
+import Footer from 'components/footer/Footer';
+import Login from 'components/login/Login';
 
 export default class App extends Component {
 
   constructor(props) {
     super(props)
-
     this.state = {
       data: [],
-      collapsible: true,
+      collapsible: false,
       siderInfo: config.modelCategory
     }
     seft = this;
@@ -188,8 +194,14 @@ export default class App extends Component {
                     </Menu.Item>
                   </Menu>
                 </Sider>
-                <Layout style={{ backgroundColor: '#ffffff' }}>
+                <Layout style={{ backgroundColor: '#f0f2f5' }}>
                   <Header {...headerInfo} {...featureInfo}/>
+                  <div style={{padding:20,backgroundColor:'white',fontSize:25}}>
+                  <Breadcrumb>
+                    <Breadcrumb.Item>设备管理</Breadcrumb.Item>
+                    <Breadcrumb.Item><a href="">机台监控</a></Breadcrumb.Item>
+                  </Breadcrumb>
+                  </div>
                   <Main {...mainInfo} {...featureInfo} style={{height: '87%'}}/>
                   <Footer />
                 </Layout>

@@ -53,6 +53,18 @@ module.exports = function (webpackConfig, env) {
     //     libraryName: 'antd',
     //     style: 'css'
     // }]);
-
+    webpackConfig.resolve.alias = {
+        components: `${__dirname}/src/components`,
+        feature: `${__dirname}/src/components/feature`,
+        common: `${__dirname}/src/components/common`,
+        // components: `${__dirname}/src/components`,
+        // utils: `${__dirname}/src/utils`,
+        // config: `${__dirname}/src/utils/config`,
+        // enums: `${__dirname}/src/utils/enums`,
+        // services: `${__dirname}/src/services`,
+        // models: `${__dirname}/src/models`,
+        // routes: `${__dirname}/src/routes`,
+        // themes: `${__dirname}/src/themes`,
+    }
     return webpackConfig;
 };
