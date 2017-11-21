@@ -1,0 +1,44 @@
+// 通用组件样式集合
+
+.normal {
+    margin-top: 20px;
+}
+.search, .normal {
+    display: inline-block;
+    vertical-align: middle;
+    .ant-form-item {
+        vertical-align: text-top;
+        margin-right: 25px;
+        margin-bottom: 0px;
+        label {
+          margin-bottom: 0;
+        }
+        > label:after {
+            content: ":";
+            position: relative;
+            top: -.5px;
+            margin: 0 8px 0 2px;
+        }
+        button {
+            line-height: 1;
+        }
+    }
+}
+
+.create {
+    display:inline-block;
+    > button {
+        margin: 5px 0;
+    }
+
+    &:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+}
+
+.uploadImg{
+    max-width: 300px;
+    max-height: 400px;
+}

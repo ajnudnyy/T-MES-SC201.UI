@@ -1,0 +1,42 @@
+/*横向时间轴*/
+.topTimeline {
+  .time-horizontal {
+      list-style-type: none;
+      border-top: 1px solid #707070;
+      max-width: 100%;
+      padding: 0px;
+      margin: 0px;
+  }
+
+  .time-horizontal li {
+      float: left;
+      position: relative;
+      text-align: -webkit-left;
+      width: 8.28%;
+      padding-top: 10px;
+  }
+
+  .time-horizontal b:after {
+      content: '';
+      position: absolute;
+      top: -6.5px;
+      left: 100%;
+      width: 12px;
+      height: 12px;
+      border: 3px solid #108ee9;
+      border-radius: 8px;
+      background: #ffffff;
+  }
+
+  .time-horizontal li:first-child b:before {
+      content: '';
+      position: absolute;
+      top: -6.5px;
+      left: 0%;
+      width: 12px;
+      height: 12px;
+      border: 3px solid #108ee9;
+      border-radius: 8px;
+      background: #ffffff;
+  }
+}
