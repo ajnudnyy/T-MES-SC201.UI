@@ -11,6 +11,7 @@ import Appdetail from '../common/Appdetail';
 import config from '../../config';
 import Timeline from '../commonComp/Timeline';
 import { ProgressBar } from 'react-bootstrap';
+import "./style/Feature1-5.less"
 const { Header, Footer, Sider, Content } = Layout
 const TreeNode = Tree.TreeNode
 const TabPane = Tabs.TabPane
@@ -18,7 +19,6 @@ const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
 const confirm = Modal.confirm
 let seft
-
 
 window.uProductCategoryUUID = 15101
 
@@ -144,8 +144,6 @@ const conf = {
     })
   },
 
-  // 创建项目所需的字段 与 更新项目所需的字段
-  // rules 规范可见 https://github.com/yiminghe/async-validator
   UType: [
     {
       name: 'strMachineSN',
@@ -186,8 +184,6 @@ const conf = {
     }
   ],
 
-  // 添加客户名单
-  // rules 规范可见 https://github.com/yiminghe/async-validator
   CType: [
     {
       name: 'strMachineSN',
@@ -253,6 +249,7 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      Device_list: [1, 1, 1, 1, 1, 1],
       siderInfo: props.siderInfo,
       ptitle:  props.ptitle,
       title: props.title,
@@ -334,193 +331,42 @@ export default class App extends Component {
               tabBarExtraContent={operations}
               style={{ height: '100%' }}>
          <TabPane tab="全部" key="1" style={{height: '87%'}}>
-           <Row type="flex" gutter={16} justify="space-around" style={{margin: 0}}>
-              <Col span={8}>
-                <Card style={{ marginBottom: '3%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
-                  <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
-                    <ul>
-                      <li style={{ lineHeight: '39px' }}><h2>TSR-700机器人</h2></li>
-                      <li style={{ lineHeight: '39px', fontSize: 'larger', color: '#666666' }}>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>3C</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>昌平设计</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>用户体验</span>
-                      </li>
-                      <li style={{ lineHeight: '26px' }}>AppID: <span style={{float: 'right'}}>2254623513</span></li>
-                      <li style={{ lineHeight: '26px' }}>项目简介: <span>不要用色条或者是色块区分, 会导致画面色彩混乱，色点是比较好的方式</span> </li>
-                      <li style={{ lineHeight: '26px', marginBottom: '18px' }}>更新时间: <span style={{float: 'right'}}>2017-06-25</span> </li>
-                    </ul>
-                  </div>
-                  <div className="custom-card" style={{ lineHeight: '39px' }}>
-                    <Badge status="processing"/>
-                    <span>正常: 2017-10-01</span>
-                    <span style={{float: 'right'}}>
-                      <Link to={'/Feature5-1'}>编辑</Link>
-                      <span className="ant-divider" />
-                        <Dropdown overlay={ Menumodel }>
-                          <a className="ant-dropdown-link">
-                            更多 <Icon type="down" />
-                          </a>
-                        </Dropdown>
-                      </span>
-                  </div>
-                </Card>
-              </Col>
-              <Col span={8}>
-                <Card style={{ marginBottom: '3%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
-                  <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
-                    <ul>
-                      <li style={{ lineHeight: '39px' }}><h2>TSR-700机器人</h2></li>
-                      <li style={{ lineHeight: '39px', fontSize: 'larger', color: '#666666' }}>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>3C</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>昌平设计</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>用户体验</span>
-                      </li>
-                      <li style={{ lineHeight: '26px' }}>AppID: <span style={{float: 'right'}}>2254623513</span></li>
-                      <li style={{ lineHeight: '26px' }}>项目简介: <span>不要用色条或者是色块区分, 会导致画面色彩混乱，色点是比较好的方式</span> </li>
-                      <li style={{ lineHeight: '26px', marginBottom: '18px' }}>更新时间: <span style={{float: 'right'}}>2017-06-25</span> </li>
-                    </ul>
-                  </div>
-                  <div className="custom-card" style={{ lineHeight: '39px' }}>
-                    <Badge status="processing"/>
-                    <span>正常: 2017-10-01</span>
-                    <span style={{float: 'right'}}>
-                      <Appdetail abc="props.abc" bcd="props.bcd"/>
-                      <span className="ant-divider" />
-                        <Dropdown overlay={ Menumodel }>
-                          <a className="ant-dropdown-link">
-                            更多 <Icon type="down" />
-                          </a>
-                        </Dropdown>
-                      </span>
-                  </div>
-                </Card>
-              </Col>
-              <Col span={8}>
-                <Card style={{ marginBottom: '3%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
-                  <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
-                    <ul>
-                      <li style={{ lineHeight: '39px' }}><h2>TSR-700机器人</h2></li>
-                      <li style={{ lineHeight: '39px', fontSize: 'larger', color: '#666666' }}>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>3C</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>昌平设计</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>用户体验</span>
-                      </li>
-                      <li style={{ lineHeight: '26px' }}>AppID: <span style={{float: 'right'}}>2254623513</span></li>
-                      <li style={{ lineHeight: '26px' }}>项目简介: <span>不要用色条或者是色块区分, 会导致画面色彩混乱，色点是比较好的方式</span> </li>
-                      <li style={{ lineHeight: '26px', marginBottom: '18px' }}>更新时间: <span style={{float: 'right'}}>2017-06-25</span> </li>
-                    </ul>
-                  </div>
-                  <div className="custom-card" style={{ lineHeight: '39px' }}>
-                    <Badge status="processing"/>
-                    <span>正常: 2017-10-01</span>
-                    <span style={{float: 'right'}}>
-                      <a href="https://www.baidu.com" target="_blank">编辑</a>
-                      <span className="ant-divider" />
-                        <Dropdown overlay={ Menumodel }>
-                          <a className="ant-dropdown-link">
-                            更多 <Icon type="down" />
-                          </a>
-                        </Dropdown>
-                      </span>
-                  </div>
-                </Card>
-              </Col>
-           </Row>
-           <Row type="flex" gutter={16} justify="space-around" style={{margin: 0}}>
-              <Col span={8}>
-                <Card style={{ marginBottom: '3%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
-                  <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
-                    <ul>
-                      <li style={{ lineHeight: '39px' }}><h2>TSR-700机器人</h2></li>
-                      <li style={{ lineHeight: '39px', fontSize: 'larger', color: '#666666' }}>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>3C</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>昌平设计</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>用户体验</span>
-                      </li>
-                      <li style={{ lineHeight: '26px' }}>AppID: <span style={{float: 'right'}}>2254623513</span></li>
-                      <li style={{ lineHeight: '26px' }}>项目简介: <span>不要用色条或者是色块区分, 会导致画面色彩混乱，色点是比较好的方式</span> </li>
-                      <li style={{ lineHeight: '26px', marginBottom: '18px' }}>更新时间: <span style={{float: 'right'}}>2017-06-25</span> </li>
-                    </ul>
-                  </div>
-                  <div className="custom-card" style={{ lineHeight: '39px' }}>
-                    <Badge status="processing"/>
-                    <span>正常: 2017-10-01</span>
-                    <span style={{float: 'right'}}>
-                      <Appdetail abc="props.abc" bcd="props.bcd"/>
-                      <span className="ant-divider" />
-                        <Dropdown overlay={ Menumodel }>
-                          <a className="ant-dropdown-link">
-                            更多 <Icon type="down" />
-                          </a>
-                        </Dropdown>
-                      </span>
-                  </div>
-                </Card>
-              </Col>
-              <Col span={8}>
-                <Card style={{ marginBottom: '3%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
-                  <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
-                    <ul>
-                      <li style={{ lineHeight: '39px' }}><h2>TSR-700机器人</h2></li>
-                      <li style={{ lineHeight: '39px', fontSize: 'larger', color: '#666666' }}>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>3C</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>昌平设计</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>用户体验</span>
-                      </li>
-                      <li style={{ lineHeight: '26px' }}>AppID: <span style={{float: 'right'}}>2254623513</span></li>
-                      <li style={{ lineHeight: '26px' }}>项目简介: <span>不要用色条或者是色块区分, 会导致画面色彩混乱，色点是比较好的方式</span> </li>
-                      <li style={{ lineHeight: '26px', marginBottom: '18px' }}>更新时间: <span style={{float: 'right'}}>2017-06-25</span> </li>
-                    </ul>
-                  </div>
-                  <div className="custom-card" style={{ lineHeight: '39px' }}>
-                    <Badge status="processing"/>
-                    <span>正常: 2017-10-01</span>
-                    <span style={{float: 'right'}}>
-                      <Appdetail abc="props.abc" bcd="props.bcd"/>
-                      <span className="ant-divider" />
-                        <Dropdown overlay={ Menumodel }>
-                          <a className="ant-dropdown-link">
-                            更多 <Icon type="down" />
-                          </a>
-                        </Dropdown>
-                      </span>
-                  </div>
-                </Card>
-              </Col>
-              <Col span={8}>
-                <Card style={{ marginBottom: '3%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
-                  <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
-                    <ul>
-                      <li style={{ lineHeight: '39px' }}><h2>TSR-700机器人</h2></li>
-                      <li style={{ lineHeight: '39px', fontSize: 'larger', color: '#666666' }}>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>3C</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>昌平设计</span>
-                        <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>用户体验</span>
-                      </li>
-                      <li style={{ lineHeight: '26px' }}>AppID: <span style={{float: 'right'}}>2254623513</span></li>
-                      <li style={{ lineHeight: '26px' }}>项目简介: <span>不要用色条或者是色块区分, 会导致画面色彩混乱，色点是比较好的方式</span> </li>
-                      <li style={{ lineHeight: '26px', marginBottom: '18px' }}>更新时间: <span style={{float: 'right'}}>2017-06-25</span> </li>
-                    </ul>
-                  </div>
-                  <div className="custom-card" style={{ lineHeight: '39px' }}>
-                    <Badge status="processing"/>
-                    <span>正常: 2017-10-01</span>
-                    <span style={{float: 'right'}}>
-                      <a href="https://www.baidu.com" target="_blank">等下</a>
-                      <span className="ant-divider" />
-                        <Dropdown overlay={ Menumodel }>
-                          <a className="ant-dropdown-link">
-                            更多 <Icon type="down" />
-                          </a>
-                        </Dropdown>
-                      </span>
-                  </div>
-                </Card>
-              </Col>
-           </Row>
-           <div style={{textAlign: '-webkit-center', position: 'absolute', bottom: '7%', left: '32%'}}>
-             <Pagination onChange={this.onShowSizeChange} defaultCurrent={6} total={500} />
-           </div>
+           <div className="Device_list">
+             {
+               this.state.Device_list.map(function(item, i){
+                 return (
+                     <Card  key={i} style={{ marginBottom: '1%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
+                       <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
+                         <ul>
+                           <li style={{ lineHeight: '39px' }}><h2>TSR-700机器人</h2></li>
+                           <li style={{ lineHeight: '39px', fontSize: 'larger', color: '#666666' }}>
+                             <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>3C</span>
+                             <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>昌平设计</span>
+                             <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>用户体验</span>
+                           </li>
+                           <li style={{ lineHeight: '26px' }}>AppID: <span style={{float: 'right'}}>2254623513</span></li>
+                           <li style={{ lineHeight: '26px' }}>项目简介: <span>不要用色条或者是色块区分, 会导致画面色彩混乱，色点是比较好的方式</span> </li>
+                           <li style={{ lineHeight: '26px', marginBottom: '18px' }}>更新时间: <span style={{float: 'right'}}>2017-06-25</span> </li>
+                         </ul>
+                       </div>
+                       <div className="custom-card" style={{ lineHeight: '39px' }}>
+                         <Badge status="processing"/>
+                         <span>正常: 2017-10-01</span>
+                         <span style={{float: 'right'}}>
+                           <Link to={'/Feature5-1'}>编辑</Link>
+                           <span className="ant-divider" />
+                             <Dropdown overlay={ Menumodel }>
+                               <a className="ant-dropdown-link">
+                                 更多 <Icon type="down" />
+                               </a>
+                             </Dropdown>
+                           </span>
+                       </div>
+                     </Card>
+                 )
+               })
+             }
+            </div>
          </TabPane>
          <TabPane tab="已发布" key="2">
            <Row gutter={16}>
