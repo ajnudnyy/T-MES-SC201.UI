@@ -8,19 +8,13 @@ const SubMenu = Menu.SubMenu;
 
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-
-/* import config from '../config';
-import Header from '../components/header/Header';
-import SubSider from '../components/sider/Sider';
-import Main from '../components/main/Main';
-import Footer from '../components/footer/Footer';
-import Login from '../components/login/Login'; */
 let seft
 import config from '../config';
 import Header from 'components/header/Header';
 import SubSider from 'components/sider/Sider';
 import Main from 'components/main/Main';
 import Footer from 'components/footer/Footer';
+import TopBreadcrumb from 'components/commonComp/TopBreadcrumb';
 import Login from 'components/login/Login';
 
 export default class App extends Component {
@@ -33,13 +27,6 @@ export default class App extends Component {
       siderInfo: config.modelCategory
     }
     seft = this;
-
-    // if(){
-    //
-    // }
-    //   sessionStorage.setItem("useruuid", GetQueryString('useruuid'))
-    //   sessionStorage.setItem("userid", GetQueryString('userid'))
-    //   sessionStorage.setItem("username", GetQueryString('username'))
   }
 
   GetQueryString = (name) => {
@@ -152,8 +139,8 @@ export default class App extends Component {
                       key="1"
                       title={
                         <span>
-                          <Icon type="laptop" />
-                          <span>机台监控</span>
+                          <Icon type="user" />
+                          <span>设备管理</span>
                         </span>}>
                       <Menu.Item key="6">
                         <Link to={'/Feature1-5'}>
@@ -168,112 +155,35 @@ export default class App extends Component {
                         </Link>
                       </Menu.Item>
                     </SubMenu>
-                    <SubMenu
-                      key="2"
-                      title={
-                        <span>
-                          <Icon type="idcard" />
-                          <span>生产管理</span>
-                        </span>}>
-                        <Menu.Item key="2-1">
-                          <Link to={'/Feature4-1'}>
-                          <Icon type="file-text" className="icons"/>
-                          <span>订单管理</span>
-                          </Link>
-                        </Menu.Item>
-                        <Menu.Item key="2-2">
-                          <Link to={'/Feature4-1'}>
-                          <Icon type="file-excel" className="icons"/>
-                          <span>生产排程</span>
-                          </Link>
-                        </Menu.Item>
-                        <Menu.Item key="2-3">
-                          <Link to={'/Feature4-1'}>
-                          <Icon type="file-text" className="icons"/>
-                          <span>生产任务</span>
-                          </Link>
-                        </Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                      key="3"
-                      title={
-                        <span>
-                          <Icon type="bar-chart" />
-                          <span>基础数据</span>
-                        </span>}>
-                      <Menu.Item key="3-1">
-                        <Link to={'/Feature1-5'}>
-                         <Icon type="menu-fold" className="icons"/>
-                         <span>机台群览</span>
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item key="3-2">
-                        <Link to={'/Feature1-6'}>
-                          <Icon type="search" className="icons"/>
-                          <span>机台详情</span>
-                        </Link>
-                      </Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                      key="4"
-                      title={
-                        <span>
-                          <Icon type="pie-chart" />
-                          <span>报表中心</span>
-                        </span>}>
-                        <Menu.Item key="4-1">
-                          <Link to={'/Feature1-1'}>
-                          <Icon type="home" className="icons"/>
-                          <span>工程管理</span>
-                          </Link>
-                        </Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                      key="5"
-                      title={
-                        <span>
-                          <Icon type="tablet" />
-                          <span>看板中心</span>
-                        </span>}>
-                        <Menu.Item key="5-1">
-                          <Link to={'/Feature5-2'}>
-                          <Icon type="appstore-o" className="icons"/>
-                          <span>我的应用</span>
-                          </Link>
-                        </Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                      key="6"
-                      title={
-                        <span>
-                          <Icon type="setting" />
-                          <span>系统设置</span>
-                        </span>}>
-                        <Menu.Item key="6-1">
-                          <Link to={'/Feature5-2'}>
-                          <Icon type="appstore-o" className="icons"/>
-                          <span>我的应用</span>
-                          </Link>
-                        </Menu.Item>
-                        <Menu.Item key="6-2">
-                          <Link to={'/Feature3-1'}>
-                          <Icon type="user" />
-                          <span>客户管理</span>
-                          </Link>
-                        </Menu.Item>
-                    </SubMenu>
-                    
-                    
+                    <Menu.Item key="2">
+                      <Link to={'/Feature1-1'}>
+                       <Icon type="home" className="icons"/>
+                       <span>工程管理</span>
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item key="3">
+                      <Link to={'/Feature5-2'}>
+                       <Icon type="appstore-o" className="icons"/>
+                       <span>我的应用</span>
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item key="4">
+                      <Link to={'/Feature3-1'}>
+                       <Icon type="user" />
+                       <span>客户管理</span>
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item key="5">
+                      <Link to={'/Feature4-1'}>
+                       <Icon type="setting" className="icons"/>
+                       <span>订单管理</span>
+                      </Link>
+                    </Menu.Item>
                   </Menu>
                 </Sider>
                 <Layout style={{ backgroundColor: '#f0f2f5' }}>
                   <Header {...headerInfo} {...featureInfo}/>
-                  <div style={{padding:20,backgroundColor:'white',fontSize:25}}>
-                  <Breadcrumb>
-                    <Breadcrumb.Item>设备管理</Breadcrumb.Item>
-                    <Breadcrumb.Item><a href="">机台监控</a></Breadcrumb.Item>
-                  </Breadcrumb>
-                  </div>
+                  <TopBreadcrumb />
                   <Main {...mainInfo} {...featureInfo} style={{height: '87%'}}/>
                   <Footer />
                 </Layout>

@@ -144,6 +144,8 @@ const conf = {
     })
   },
 
+  // 创建项目所需的字段 与 更新项目所需的字段
+  // rules 规范可见 https://github.com/yiminghe/async-validator
   UType: [
     {
       name: 'strMachineSN',
@@ -184,6 +186,8 @@ const conf = {
     }
   ],
 
+  // 添加客户名单
+  // rules 规范可见 https://github.com/yiminghe/async-validator
   CType: [
     {
       name: 'strMachineSN',
