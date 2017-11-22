@@ -206,6 +206,20 @@ export default class APP extends Component {
       return columns;
 
   }
+  //查询回调
+  handleRetrieve= (info)=>{
+    const self = this;
+    self.setState({
+      loading: true
+    })
+
+    self.state.config.Retrieve(info, function(list){
+      self.setState({
+        loading: false,
+        resultList: list
+      })
+    })
+  }
 
   getpageData = (num) => {
     const self = this

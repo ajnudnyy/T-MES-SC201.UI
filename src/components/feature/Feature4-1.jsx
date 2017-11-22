@@ -23,7 +23,6 @@ const conf = {
     type: 'Expandtable',
     uProductUUID: 0,
     url: 'http://dev.top-link.me/dev/Handler_Plproject_V1.ashx',
-
     // 初始化页面的数据 回调函数传入 items 列表
     pageData: function(num ,callback) {
 
@@ -159,7 +158,7 @@ const conf = {
     },
 
     // 模拟添加数据的接口 回调
-    Create: function(data, callback) {
+    /* Create: function(data, callback) {
       let dat = {
         key: '1000',
         uProductUUID: this.uProductUUID,
@@ -172,7 +171,7 @@ const conf = {
         //这块请求更新数据 成功回调
         callback(dat);
       })
-    },
+    }, */
 
     //客户信息修改
     Update: function(data, callback) {
@@ -205,7 +204,7 @@ const conf = {
     // 创建项目所需的字段 与 更新项目所需的字段
     // rules 规范可见 https://github.com/yiminghe/async-validator
 
-    UType: [
+    /* UType: [
       {
         name: 'strMachineSN',
         label: '机器型号',
@@ -243,7 +242,7 @@ const conf = {
           }
         ]
       }
-    ],
+    ], */
 
     // 可设置的查询字段
     RType: [
@@ -280,6 +279,7 @@ const conf = {
 
     // 查询操作回调
     Retrieve: function(data, callback) {
+      console.log("看看有没有retrie")
       var dat = {
         nPageSize: 8,
         nPageIndex: 0,
