@@ -11,34 +11,7 @@ let CForm = React.createClass({
 
     getInitialState: function() {
         return { visible: false }
-    },
-
-    render: function() {
-
-        MeduleInfo = this.props.MeduleInfo
-        const CType = this.props.CType;
-        const { getFieldDecorator } = this.props.form;
-        const formItemLayout = {
-            labelCol: { span: 4 },
-            wrapperCol: { span: 18 },
-        }
-
-        return  CType ?
-                <div className="create create-extra">
-                  <Button type="primary" icon="plus-circle-o" onClick={this.showModal}>添加</Button>
-                  <Modal title='添加新对象' visible={this.state.visible} onOk={this.handleCreate} onCancel={this.hideModal}>
-                    <Form layout="horizontal">
-                      {
-                        CType.map(function(item, index){
-                          //return self.dealConfigCType(item);
-                          return <CFormItem key={index} getFieldDecorator={getFieldDecorator} formItemLayout={formItemLayout} item={item}/>
-                        })
-                      }
-                    </Form>
-                  </Modal>
-                </div>:
-                <div></div>
-    },
+    },  
 
     handleCreate: function(){
       console.log('收到表单值：', this.props.form.getFieldsValue());
@@ -68,7 +41,35 @@ let CForm = React.createClass({
     hideModal: function() {
         this.setState({ visible: false });
         this.handleReset();
+    },
+
+    render: function() {
+        
+        MeduleInfo = this.props.MeduleInfo
+        const CType = this.props.CType;
+        const { getFieldDecorator } = this.props.form;
+        const formItemLayout = {
+            labelCol: { span: 4 },
+            wrapperCol: { span: 18 },
+        }
+
+        return  CType ?
+                <div className="create create-extra">
+                    <Button type="primary" icon="plus-circle-o" onClick={this.showModal}>添加</Button>
+                    <Modal title='添加新对象' visible={this.state.visible} onOk={this.handleCreate} onCancel={this.hideModal}>
+                    <Form layout="horizontal">
+                        {
+                        CType.map(function(item, index){
+                            //return self.dealConfigCType(item);
+                            return <CFormItem key={index} getFieldDecorator={getFieldDecorator} formItemLayout={formItemLayout} item={item}/>
+                        })
+                        }
+                    </Form>
+                    </Modal>
+                </div>:
+                <div></div>
     }
+
 });
 
 CForm = Form.create()(CForm);

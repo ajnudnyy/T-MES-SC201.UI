@@ -28,8 +28,8 @@ import {
   Spin,
   notification,
   Alert
-} from 'antd'
-import {Link} from 'dva/router'
+} from 'antd';
+import {Link} from 'dva/router';
 import Immutable from 'immutable';
 import CFormItem from './CreateFormItem';
 import CTextItem from './CreateTextItem';

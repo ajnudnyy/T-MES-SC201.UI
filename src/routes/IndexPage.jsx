@@ -98,7 +98,7 @@ export default class App extends Component {
   }
 
   render() {
-    console.log("我看看参数",this.props)
+    console.log("我看看参数",this.props);
     let featureId = this.props.params.FeatureId || config.modelCategory.selectedKey;
     //const components = config.main.components;
     const headerInfo = {
@@ -116,6 +116,7 @@ export default class App extends Component {
         permission: config.userInfo.permission,
         loginUrl: config.userInfo.loginUrl
     }
+
     let featureInfo = {
         featureId: featureId,
         params: this.props.params.params,
@@ -155,30 +156,6 @@ export default class App extends Component {
                         </Link>
                       </Menu.Item>
                     </SubMenu>
-                    {/* <Menu.Item key="2">
-                      <Link to={'/Feature1-1'}>
-                       <Icon type="home" className="icons"/>
-                       <span>工程管理</span>
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                      <Link to={'/Feature5-2'}>
-                       <Icon type="appstore-o" className="icons"/>
-                       <span>我的应用</span>
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item key="4">
-                      <Link to={'/Feature3-1'}>
-                       <Icon type="user" />
-                       <span>客户管理</span>
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item key="5">
-                      <Link to={'/Feature4-1'}>
-                       <Icon type="setting" className="icons"/>
-                       <span>订单管理</span>
-                      </Link>
-                    </Menu.Item> */}
                     <SubMenu
                       key="2"
                       title={

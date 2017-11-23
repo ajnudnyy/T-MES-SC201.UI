@@ -1,14 +1,13 @@
-
 import React, {
     Component
   } from 'react'
   import { browserHistory } from 'react-router'
   import { Link } from 'dva/router';
-  import FormG from '../common/FormG';
-  import SubSider from '../../components/sider/Sider';
-  import FeatureSetConfig from '../common/FeatureSetConfig';
-  import { DoPost, HandleCreateform } from '../../server'
-  import config from '../../config';
+  import FormG from 'common/FormG';
+  import SubSider from 'components/sider/Sider';
+  import FeatureSetConfig from 'common/FeatureSetConfig';
+  import { DoPost, HandleCreateform } from 'server'
+  import config from 'config';
   import { Layout, Tree, Table, Tabs, Button, Card, Menu, Icon, Modal, Popconfirm, Badge, Dropdown } from 'antd'
   const { Header, Footer, Sider, Content } = Layout
   const TreeNode = Tree.TreeNode
@@ -20,54 +19,16 @@ import React, {
 
 
   const conf = {
-  
+      /**
+       * 基础配置参数
+       * 1.type:表格类型   
+       * 2.isSelection:table是否带勾选
+       * **/
       type: 'tableFeature',
-      uProductUUID: 0,
-      url: 'http://dev.top-link.me/dev/Handler_Plproject_V1.ashx',
       isSelection:true,
-  
-      // 初始化页面的数据 回调函数传入 items 列表
-      pageData: function(num ,callback) {
-  
-        var dat = {
-          nPageSize: 8,
-          nPageIndex: num - 1,
-          uProductUUID: '101010000',
-          uDeviceUUID: 0,
-          strKeyWord: ''
-        }
-  
-        DoPost(this.url, "Plproject_List", dat, function(res) {
-          var list = [],
-            Ui_list = res.obj || [],
-            totalcount = res.obj.totalcount
-            Ui_list.forEach(function(item, index) {
-              list.push({
-                key: index,
-                uPLProjectUUID: item.uPLProjectUUID,
-                dtPLProjectUpdateTimeUTC: item.dtPLProjectUpdateTimeUTC,
-                strPLProjectDescription: item.strPLProjectDescription,
-                strPLProjectName: item.strPLProjectName,
-                strPLProjectNote: item.strPLProjectNote,
-                strPlanNum:'280',
-                strPlanStart:'2017年12月31'
-              })
-            })
-          const pagination = {
-            ...seft.state.pagination
-          }
-          // Read total count from server
-          // pagination.total = data.totalCount;
-          pagination.total = totalcount;
-          callback(list, {
-            total: pagination.total,
-            nPageSize: 8
-          })
-        }, function(error) {
-          message.info(error);
-        })
-      },
-  
+      // isSlider:true,
+      // isUpdate:true,
+
       columns: [
         {
           title: '任务编号',
@@ -109,67 +70,52 @@ import React, {
           ], // 可选
         }
       ],
+      // 初始化页面的数据 回调函数传入 items 列表
+      pageData: function(num ,callback) {
   
-      /* expandedRowRender: function(record) {
-        console.log('record=======', record)
-        var list = [
-          {
-            key: record.key,
-            date: record.date,
-            name: record.name,
-            upgradeNum: record.upgradeNum
-          }
-        ]
         var dat = {
           nPageSize: 8,
-          nPageIndex: 1,
+          nPageIndex: num - 1,
           uProductUUID: '101010000',
           uDeviceUUID: 0,
           strKeyWord: ''
         }
   
-        const menu = (
-          <Menu>
-            <Menu.Item>
-              Action 1
-            </Menu.Item>
-            <Menu.Item>
-              Action 2
-            </Menu.Item>
-          </Menu>
-        );
-  
-        const columns = [
-          { title: '交付时间', dataIndex: 'date', key: 'date' },
-          { title: '物料名称', dataIndex: 'name', key: 'name' },
-          { title: '库存', key: 'state', render: () => <span><Badge status="success" />库存</span> },
-          { title: '数量', dataIndex: 'upgradeNum', key: 'upgradeNum' },
-          {
-            title: 'Action',
-            dataIndex: 'operation',
-            key: 'operation',
-            render: () => (
-              <span className="table-operation">
-                <a href="#">Pause</a>
-                <a href="#">Stop</a>
-                <Dropdown overlay={menu}>
-                  <a href="#">
-                    More <Icon type="down" />
-                  </a>
-                </Dropdown>
-              </span>
-            ),
-          },
-        ];
-  
-        return (
-          <Table
-            columns={columns}
-            dataSource={list}
-            pagination={false}/>
-        )
-      }, */
-  
+        DoPost(this.url, "Plproject_List", dat, function(res) {
+          var list = [],
+            Ui_list = res.obj || [],
+            totalcount = res.obj.totalcount
+            Ui_list.forEach(function(item, index) {
+              list.push({
+                key: index,
+                uPLProjectUUID: item.uPLProjectUUID,
+                dtPLProjectUpdateTimeUTC: item.dtPLProjectUpdateTimeUTC,
+                strPLProjectDescription: item.strPLProjectDescription,
+                strPLProjectName: item.strPLProjectName,
+                strPLProjectNote: item.strPLProjectNote,
+                strPlanNum:'280',
+                strPlanStart:'2017年12月31'
+              })
+            })
+          const pagination = {
+            ...seft.state.pagination
+          }
+          // Read total count from server;
+          // pagination.total = data.totalCount;
+          pagination.total = totalcount;
+          callback(list, {
+            total: pagination.total,
+            nPageSize: 8
+          })
+        }, function(error) {
+          message.info(error);
+        })
+      },
+
+      /* 临时添加测试*/
+      uProductUUID: 0,
+      url: 'http://dev.top-link.me/dev/Handler_Plproject_V1.ashx',      
+
       // 模拟添加数据的接口 回调
       Create: function(data, callback) {
         let dat = {
@@ -214,10 +160,12 @@ import React, {
           callback(data)
         })
       },
-      // 创建项目所需的字段 与 更新项目所需的字段
-      // rules 规范可见 https://github.com/yiminghe/async-validator
-  
-      UType: [
+
+     /*  
+      ***创建项目所需的字段 与 更新项目所需的字段
+      ****rules 规范可见 https://github.com/yiminghe/async-validator 
+      */
+      /* UType: [
         {
           name: 'strMachineSN',
           label: '机器型号',
@@ -255,10 +203,13 @@ import React, {
             }
           ]
         }
-      ],
+      ], */
   
-      // 可设置的查询字段
-      RType: [
+
+      /* 
+      **可设置的查询字段 
+      */
+      /* RType: [
         {
               name: 'id',
               label: '订单号',
@@ -288,9 +239,12 @@ import React, {
             }
           ]
         }
-      ],
+      ], */
   
-      // 查询操作回调
+
+      /**
+       * *查询操作回调
+       *  */
       Retrieve: function(data, callback) {
         var dat = {
           nPageSize: 8,
@@ -316,6 +270,7 @@ import React, {
           message.info(error);
         })
       },
+
       handleSelect: function (selectedKeys) {
         let dat = {
           nPageIndex: 0,
@@ -342,9 +297,6 @@ import React, {
           message.info(error);
         })
       },
-      Selection:function(){
-
-      }
   };
   
   const Feature = FeatureSetConfig(conf);
@@ -352,7 +304,7 @@ import React, {
   export default class App extends Component {
   
     constructor(props) {
-      super(props)
+      super(props);
       this.state = {
         siderInfo: props.siderInfo,
         data: [{
@@ -405,7 +357,7 @@ import React, {
   
     render() {
       return (
-        <Feature />
+        <Feature isslider={true} />
       )
     }
   }
