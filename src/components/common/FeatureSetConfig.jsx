@@ -33,7 +33,7 @@ const FeatureSet = (config) => {
         <Expand config={config} isSlider={false} isUpdate={false} />
       )
     }
-
+    console.log('看看传什么config过来了',config)    
     let tableFeature = React.createClass({
         getInitialState: function(){
             return {
@@ -45,7 +45,8 @@ const FeatureSet = (config) => {
               total: 0,
               pageSize: 10,
               isSlider: this.props.isSlider,
-              isUpdate: this.props.isUpdate
+              isUpdate: this.props.isUpdate,
+              isSelection:config.isSelection
             }
         },
 
@@ -58,11 +59,18 @@ const FeatureSet = (config) => {
 
 
         render: function() {
+            const rowSelection = {
+                onChange: (selectedRowKeys, selectedRows) => {
+                },
+                getCheckboxProps: record => ({
+                  disabled: record.name === 'Disabled User',    // Column configuration not to be checked
+                }),
+              };
             const self = this
 
             let table
             let Slider
-
+              console.log('有没有选择呀',this.state.isSelection)
             Slider = self.state.isSlider ? <Sefchsider handleSelect={ this.props.isFetchmach ? config.handleSelect : self.handleSelect } /> : <span></span>;
 
             if (config.pageData) {
@@ -76,9 +84,9 @@ const FeatureSet = (config) => {
                         self.getpageData(num)
                     }
                 }
-                table = <Table dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} pagination={pagination} />;
+                table = <Table rowSelection={this.state.isSelection?rowSelection:null} dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} pagination={pagination} />;
             } else {
-                table = <Table dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} />;
+                table = <Table rowSelection={this.state.isSelection?rowSelection:null} dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} />;
             }
 
             return  <div className={this.props.className} >
@@ -228,6 +236,7 @@ const FeatureSet = (config) => {
             });
           });
         },
+        //切换弹框显示
         hideUpdateForm: function(){
           this.setState({
             updateFromShow: false,
@@ -346,102 +355,6 @@ const FeatureSet = (config) => {
         }
     });
 
-    let simpleFeature = React.createClass({
-        getInitialState: function(){
-            return {
-                item:{},
-                loading: false,
-                updateFromShow: false,
-                updateFromItem: {}
-            }
-        },
-
-        componentWillMount: function(){
-        },
-
-        render: function() {
-            const self = this;
-            const itemInfo = this.state.item;
-
-            const { getFieldDecorator } = this.props.form;
-            const formItemLayout = {
-                labelCol: { span: 3 },
-                wrapperCol: { span: 18 },
-            };
-
-            const operate = config.operate || [];
-
-            return  <div className={this.props.className}>
-                        <Form layout="horizontal" className='p-relative'>
-                            {
-                                this.state.loading?
-                                    <div className="formLayout">
-                                        <Spin tip="Loading..." size="large" style={{"marginTop":"50px"}} />
-                                    </div>:
-                                    ''
-                            }
-                            {
-                                config.columns?
-                                    config.columns.map(function(item){
-                                        item.value = itemInfo[item.dataIndex]||'';
-                                        return <CTextItem key={item.dataIndex} formItemLayout={formItemLayout} item={item}/>
-                                    }):
-                                    ''
-                            }
-                            {
-                                config.UType?
-                                    config.UType.map(function(item){
-                                        item.defaultValue = itemInfo[item.name]||'';
-                                        return <CFormItem key={item.name} getFieldDecorator={getFieldDecorator} formItemLayout={formItemLayout} item={item}/>
-                                    }):
-                                    ''
-                            }
-                        </Form>
-                        {
-                            operate.map(function(btn){
-
-                                return <Button key={btn.text} type="primary" size="large" onClick={self.operateCallbacks.bind(self, btn)} style={btn.style}>{btn.text}</Button>
-                            })
-                        }
-                    </div>
-        },
-
-        componentDidMount: function(){
-            const self = this;
-            self.setState({
-                loading: true
-            });
-
-            config.initData(function(item){
-                self.setState({
-                    item: item,
-                    loading: false
-                });
-            });
-        },
-
-        operateCallbacks: function(btn){
-            const self = this;
-
-            let itemI = Immutable.fromJS(this.props.form.getFieldsValue());
-
-            if(btn.type === 'update'){
-                const self = this;
-
-                config.Update(itemI.toJS(), function(item){
-                    message.success('更新成功');
-                    self.setState({
-                        item: item
-                    });
-                });
-
-            }else if(btn.callback){
-                btn.callback(itemI.toJS());
-            }
-        }
-    });
-    simpleFeature = Form.create()(simpleFeature);
-
     let graphFeature = React.createClass({
         getInitialState: function(){
             return {
@@ -487,11 +400,6 @@ const FeatureSet = (config) => {
         case 'graphList':
             return graphFeature;
             break;
-
-        case 'simpleObject':
-            return simpleFeature;
-            break;
-
         case 'complexObject':
             return complexFeature;
             break;

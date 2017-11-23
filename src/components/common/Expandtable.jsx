@@ -31,7 +31,6 @@ import {
 } from 'antd'
 import {Link} from 'dva/router'
 import Immutable from 'immutable';
-
 import CFormItem from './CreateFormItem';
 import CTextItem from './CreateTextItem';
 // 搜索查询栏form 创建新item-form 更新form

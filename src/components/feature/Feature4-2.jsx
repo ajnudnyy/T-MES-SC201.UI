@@ -17,12 +17,14 @@ import React, {
   const MenuItemGroup = Menu.ItemGroup
   const confirm = Modal.confirm
   let seft
-  
+
+
   const conf = {
   
       type: 'tableFeature',
       uProductUUID: 0,
       url: 'http://dev.top-link.me/dev/Handler_Plproject_V1.ashx',
+      isSelection:true,
   
       // 初始化页面的数据 回调函数传入 items 列表
       pageData: function(num ,callback) {
@@ -46,7 +48,9 @@ import React, {
                 dtPLProjectUpdateTimeUTC: item.dtPLProjectUpdateTimeUTC,
                 strPLProjectDescription: item.strPLProjectDescription,
                 strPLProjectName: item.strPLProjectName,
-                strPLProjectNote: item.strPLProjectNote
+                strPLProjectNote: item.strPLProjectNote,
+                strPlanNum:'280',
+                strPlanStart:'2017年12月31'
               })
             })
           const pagination = {
@@ -66,21 +70,29 @@ import React, {
   
       columns: [
         {
-          title: '订单号',
+          title: '任务编号',
           dataIndex: 'uPLProjectUUID',
           type: 'string'
         }, {
-          title: '交货时间',
+          title: '模具编号',
           dataIndex: 'dtPLProjectUpdateTimeUTC',
           type: 'dtPLProjectUpdateTimeUTC'
         }, {
-          title: '名称',
+          title: '用料名称',
           dataIndex: 'strPLProjectName',
           type: 'string'
         },
         {
-          title: '状态',
+          title: '机器号',
           dataIndex: 'strPLProjectDescription',
+          type: 'string'
+        },{
+          title: '计划模数',
+          dataIndex: 'strPlanNum',
+          type: 'string'
+        },{
+          title: '计划开始',
+          dataIndex: 'strPlanStart',
           type: 'string'
         },{
           title: '操作',
@@ -98,7 +110,7 @@ import React, {
         }
       ],
   
-      expandedRowRender: function(record) {
+      /* expandedRowRender: function(record) {
         console.log('record=======', record)
         var list = [
           {
@@ -156,7 +168,7 @@ import React, {
             dataSource={list}
             pagination={false}/>
         )
-      },
+      }, */
   
       // 模拟添加数据的接口 回调
       Create: function(data, callback) {
@@ -329,6 +341,9 @@ import React, {
         }, function(error) {
           message.info(error);
         })
+      },
+      Selection:function(){
+
       }
   };
   
