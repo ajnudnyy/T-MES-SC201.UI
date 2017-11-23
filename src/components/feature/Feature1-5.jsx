@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {browserHistory} from 'react-router'
-import {Link} from 'dva/router';
+import { Link } from 'dva/router';
 import FormG from '../common/FormG';
-import { Layout, Tree, Table, Tabs, Button, Card, Menu, Icon, Modal, Row, Col, Pagination, Badge, Dropdown } from 'antd';
+import { Layout, Tree, Table, Tabs, Button, Card, Menu, Icon, Modal, Row, Col, Pagination, Badge, Dropdown, Progress } from 'antd';
 import Sefchsider from '../../components/sider/Sefchsider';
 import FeatureSetConfig from '../common/FeatureSetConfig';
 import SelectItem from '../common/SelectItem';
@@ -11,6 +11,7 @@ import Appdetail from '../common/Appdetail';
 import config from '../../config';
 import Timeline from '../commonComp/Timeline';
 import { ProgressBar } from 'react-bootstrap';
+import bulb from './image/light_bulbs48.png'
 import "./style/Feature1-5.less"
 const { Header, Footer, Sider, Content } = Layout
 const TreeNode = Tree.TreeNode
@@ -253,7 +254,7 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      Device_list: [1, 1, 1, 1, 1, 1],
+      Device_list: [1, 1, 1, 1, 1, 1, 1, 1, 1],
       siderInfo: props.siderInfo,
       ptitle:  props.ptitle,
       title: props.title,
@@ -332,57 +333,170 @@ export default class App extends Component {
       <div style={{height: '100%'}}>
         <Tabs defaultActiveKey="1"
               onChange={this.onchangeHandle_callback}
-              tabBarExtraContent={operations}
               style={{ height: '100%' }}>
          <TabPane tab="全部" key="1" style={{height: '87%'}}>
            <div className="Device_list">
              {
                this.state.Device_list.map(function(item, i){
                  return (
-                     <Card  key={i} style={{ marginBottom: '1%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
-                       <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
-                         <ul>
-                           <li style={{ lineHeight: '39px' }}><h2>TSR-700机器人</h2></li>
-                           <li style={{ lineHeight: '39px', fontSize: 'larger', color: '#666666' }}>
-                             <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>3C</span>
-                             <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>昌平设计</span>
-                             <span style={{margin: '0 10px', backgroundColor: 'rgba(233, 233, 233, 0.57)', border: 'solid 1px rgba(233, 233, 233, 0.57)', borderRadius: '5px', padding: '0 1%'}}>用户体验</span>
-                           </li>
-                           <li style={{ lineHeight: '26px' }}>AppID: <span style={{float: 'right'}}>2254623513</span></li>
-                           <li style={{ lineHeight: '26px' }}>项目简介: <span>不要用色条或者是色块区分, 会导致画面色彩混乱，色点是比较好的方式</span> </li>
-                           <li style={{ lineHeight: '26px', marginBottom: '18px' }}>更新时间: <span style={{float: 'right'}}>2017-06-25</span> </li>
-                         </ul>
+                     <Card key={i} style={{ marginBottom: '1%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
+                       <div className="custom-card" style={{ lineHeight: '39px' }}>
+                         <Row>
+                          <Col span={21}>28#</Col>
+                          <Col span={3}><img src={bulb}></img></Col>
+                         </Row>
+                         <h3>worker12-1232434</h3>
+                         <Row>
+                          <Col span={7}>
+                            <ul>
+                              <li style={{ lineHeight: '26px' }}>操作人:</li>
+                              <li style={{ lineHeight: '26px', marginBottom: '18px' }}>实施周期:</li>
+                            </ul>
+                          </Col>
+                          <Col span={17}>
+                            <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
+                              <ul>
+                                <li style={{ lineHeight: '26px' }}>黄月英</li>
+                                <li style={{ lineHeight: '26px', marginBottom: '18px' }}>25s</li>
+                              </ul>
+                            </div>
+                          </Col>
+                         </Row>
                        </div>
                        <div className="custom-card" style={{ lineHeight: '39px' }}>
-                         <Badge status="processing"/>
-                         <span>正常: 2017-10-01</span>
-                         <span style={{float: 'right'}}>
-                           <Link to={'/Feature5-1'}>编辑</Link>
-                           <span className="ant-divider" />
-                             <Dropdown overlay={ Menumodel }>
-                               <a className="ant-dropdown-link">
-                                 更多 <Icon type="down" />
-                               </a>
-                             </Dropdown>
-                           </span>
+                         <Row>
+                          <Col span={7}>生产进度:</Col>
+                          <Col span={17}><Progress percent={45} strokeWidth={5} /></Col>
+                         </Row>
                        </div>
                      </Card>
                  )
                })
              }
-            </div>
+           </div>
          </TabPane>
-         <TabPane tab="已发布" key="2">
-           <Row gutter={16}>
-            <Col span={12} />
-            <Col span={12} />
-           </Row>
+         <TabPane tab="停机" key="2">
+           <div className="Device_list">
+             {
+               this.state.Device_list.map(function(item, i){
+                 return (
+                     <Card key={i} style={{ marginBottom: '1%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
+                       <div className="custom-card" style={{ lineHeight: '39px' }}>
+                         <Row>
+                          <Col span={21}>28#</Col>
+                          <Col span={3}><img src={bulb}></img></Col>
+                         </Row>
+                         <h3>worker12-1232434</h3>
+                         <Row>
+                          <Col span={7}>
+                            <ul>
+                              <li style={{ lineHeight: '26px' }}>操作人:</li>
+                              <li style={{ lineHeight: '26px', marginBottom: '18px' }}>实施周期:</li>
+                            </ul>
+                          </Col>
+                          <Col span={17}>
+                            <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
+                              <ul>
+                                <li style={{ lineHeight: '26px' }}>黄月英</li>
+                                <li style={{ lineHeight: '26px', marginBottom: '18px' }}>25s</li>
+                              </ul>
+                            </div>
+                          </Col>
+                         </Row>
+                       </div>
+                       <div className="custom-card" style={{ lineHeight: '39px' }}>
+                         <Row>
+                          <Col span={7}>生产进度:</Col>
+                          <Col span={17}><Progress percent={45} strokeWidth={5} /></Col>
+                         </Row>
+                       </div>
+                     </Card>
+                 )
+               })
+             }
+           </div>
          </TabPane>
-         <TabPane tab="发布中" key="3">
-           <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />
+         <TabPane tab="掉电" key="3">
+           <div className="Device_list">
+             {
+               this.state.Device_list.map(function(item, i){
+                 return (
+                     <Card key={i} style={{ marginBottom: '1%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
+                       <div className="custom-card" style={{ lineHeight: '39px' }}>
+                         <Row>
+                          <Col span={21}>28#</Col>
+                          <Col span={3}><img src={bulb}></img></Col>
+                         </Row>
+                         <h3>worker12-1232434</h3>
+                         <Row>
+                          <Col span={7}>
+                            <ul>
+                              <li style={{ lineHeight: '26px' }}>操作人:</li>
+                              <li style={{ lineHeight: '26px', marginBottom: '18px' }}>实施周期:</li>
+                            </ul>
+                          </Col>
+                          <Col span={17}>
+                            <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
+                              <ul>
+                                <li style={{ lineHeight: '26px' }}>黄月英</li>
+                                <li style={{ lineHeight: '26px', marginBottom: '18px' }}>25s</li>
+                              </ul>
+                            </div>
+                          </Col>
+                         </Row>
+                       </div>
+                       <div className="custom-card" style={{ lineHeight: '39px' }}>
+                         <Row>
+                          <Col span={7}>生产进度:</Col>
+                          <Col span={17}><Progress percent={45} strokeWidth={5} /></Col>
+                         </Row>
+                       </div>
+                     </Card>
+                 )
+               })
+             }
+           </div>
          </TabPane>
-         <TabPane tab="已停止" key="4">
-           <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />
+         <TabPane tab="其它" key="4">
+           <div className="Device_list">
+             {
+               this.state.Device_list.map(function(item, i){
+                 return (
+                     <Card key={i} style={{ marginBottom: '1%', borderRadius: '3%', border: '1px solid #d9edfc' }} bodyStyle={{ padding: '2px 22px' }}>
+                       <div className="custom-card" style={{ lineHeight: '39px' }}>
+                         <Row>
+                          <Col span={21}>28#</Col>
+                          <Col span={3}><img src={bulb}></img></Col>
+                         </Row>
+                         <h3>worker12-1232434</h3>
+                         <Row>
+                          <Col span={7}>
+                            <ul>
+                              <li style={{ lineHeight: '26px' }}>操作人:</li>
+                              <li style={{ lineHeight: '26px', marginBottom: '18px' }}>实施周期:</li>
+                            </ul>
+                          </Col>
+                          <Col span={17}>
+                            <div className="custom-image" style={{ borderBottom: 'solid 1px #e9e9e9'}}>
+                              <ul>
+                                <li style={{ lineHeight: '26px' }}>黄月英</li>
+                                <li style={{ lineHeight: '26px', marginBottom: '18px' }}>25s</li>
+                              </ul>
+                            </div>
+                          </Col>
+                         </Row>
+                       </div>
+                       <div className="custom-card" style={{ lineHeight: '39px' }}>
+                         <Row>
+                          <Col span={7}>生产进度:</Col>
+                          <Col span={17}><Progress percent={45} strokeWidth={5} /></Col>
+                         </Row>
+                       </div>
+                     </Card>
+                 )
+               })
+             }
+           </div>
          </TabPane>
         </Tabs>
       </div>

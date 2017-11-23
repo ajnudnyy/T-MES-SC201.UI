@@ -84,10 +84,6 @@ const FeatureSet = (config) => {
             return  <div className={this.props.className} >
                       {Slider}
                       <div style={{ flex: 7 }}>
-                        <Breadcrumb className="title">
-                          <Breadcrumb.Item>{this.props.ptitle}</Breadcrumb.Item>
-                          <Breadcrumb.Item>{ self.state.isSlider ? global.slidertitle : this.props.title }</Breadcrumb.Item>
-                        </Breadcrumb>
                           <RForm RType={config.RType} submit={self.handleRetrieve} />
                           <CForm CType={config.CType} submit={self.handleCreate} />
                           <UForm UType={config.UType} submit={self.handleUpdate} isShow={this.state.updateFromShow} updateItem={this.state.updateFromItem} hideForm={this.hideUpdateForm}/>

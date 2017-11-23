@@ -98,7 +98,7 @@ export default class App extends Component {
   }
 
   render() {
-    console.log("我看看参数",this.props)    
+    console.log("我看看参数",this.props)
     let featureId = this.props.params.FeatureId || config.modelCategory.selectedKey;
     //const components = config.main.components;
     const headerInfo = {
@@ -145,7 +145,7 @@ export default class App extends Component {
                       <Menu.Item key="6">
                         <Link to={'/Feature1-5'}>
                          <Icon type="menu-fold" className="icons"/>
-                         <span>机台群览</span>
+                         <span>自动机车间机台概览</span>
                         </Link>
                       </Menu.Item>
                       <Menu.Item key="7">

@@ -100,7 +100,7 @@ export default class APP extends Component {
       updateFromShow: false,
       updateFromItem: {},
       total: 0,
-      pageSize: 10,
+      pageSize: 30,
       isSlider: this.props.isSlider,
       isUpdate: this.props.isUpdate,
       config: this.props.config

@@ -61,7 +61,9 @@ const conf = {
             strProductName_cn: item.strProductName_cn,
             strProductDescription_cn: item.strProductDescription_cn,
             strProductImage: 'http://www.topstarltd.com/Public/Uploads/Kindeditor/image/20161005/20161005101347_66599.jpg',
-            dtProductDateTime: item.dtProductDateTime
+            dtProductDateTime: item.dtProductDateTime,
+            productData: item.strProductDescription_cn,
+            reason: item.strProductDescription_cn
           })
         })
         const pagination = {
@@ -81,161 +83,31 @@ const conf = {
 
   columns: [
     {
-      title: '机器外形',
+      title: '状态',
       dataIndex: 'strProductImage',
       type: 'image'
     }, {
-      title: '名称',
+      title: '时间起点',
       dataIndex: 'strProductName_cn',
       type: 'string'
     }, {
-      title: '描述',
+      title: '报警(次)',
       dataIndex: 'strProductDescription_cn',
       type: 'string'
     }, {
-      title: '操作',
+      title: '开模数量',
       dataIndex: 'uProductUUID',
-      type: 'operate', // 操作的类型必须为 operate
-      btns: [
-        {
-          text: '更新',
-          type: 'update'
-        }, {
-          text: '删除',
-          type: 'delete'
-        }
-      ], // 可选
+      type: 'string'
+    }, {
+      title: '生产数据',
+      dataIndex: 'productData',
+      type: 'string'
+    }, {
+      title: '停机原因',
+      dataIndex: 'reason',
+      type: 'string'
     }
   ],
-  // 模拟添加数据的接口 回调
-  Create: function(data, callback) {
-    console.log('this.uProductUUID====被选中的产品型号是=========', this.uProductUUID)
-    let dat = {
-      key: '1000',
-      strProductName_cn: this.strProductName_cn,
-      strProductDescription_cn: data.strProductDescription_cn,
-      strProductImage: data.strProductImage,
-      dtProductDateTime: data.dtProductDateTime
-    }
-
-    HandleCreateform(this.url, "system_customer_add", dat, function(res) {
-      //这块请求更新数据 成功回调
-      callback(dat);
-    })
-  },
-
-  //客户信息修改
-  Update: function(data, callback) {
-    let dat = {
-      uMachineUUID: data.uMachineUUID,
-      strMachineSN: data.strMachineSN,
-      dtMachineBornDatetime: data.dtMachineBornDatetime,
-      strMachineNote: data.strMachineNote
-    }
-
-    DoPost(this.url, "system_customer_update", dat, function(res) {
-      //这块请求更新数据 成功回调
-      callback(data)
-    })
-  },
-
-  // 删除操作
-  Delete: function(data, callback) {
-    var dat = {
-      uMachineUUID: data.uMachineUUID
-
-    }
-
-    DoPost(this.url, "system_customer_del", dat, function(res) {
-      //这块请求更新数据 成功回调
-
-      callback(data)
-    })
-  },
-
-  // 创建项目所需的字段 与 更新项目所需的字段
-  // rules 规范可见 https://github.com/yiminghe/async-validator
-  UType: [
-    {
-      name: 'strMachineSN',
-      label: '机器型号',
-      type: 'string',
-      placeholder: '请输入型号',
-      rules: [
-        {
-          required: true,
-          min: 5,
-          message: '型号至少为 5 个字符'
-        }
-      ]
-    }, {
-      name: 'dtMachineBornDatetime',
-      label: '出厂日期',
-      type: 'date',
-      placeholder: '请输入名称',
-      rules: [
-        {
-          required: true,
-          min: 5,
-          message: '描述至少为 5 个字符'
-        }
-      ]
-    }, {
-      name: 'strMachineNote',
-      label: '备注',
-      type: 'string',
-      placeholder: '请输入描述',
-      rules: [
-        {
-          required: true,
-          min: 5,
-          message: '描述至少为 5 个字符'
-        }
-      ]
-    }
-  ],
-
-  // 添加客户名单
-  // rules 规范可见 https://github.com/yiminghe/async-validator
-  CType: [
-    {
-      name: 'strMachineSN',
-      label: '机器型号',
-      type: 'string',
-      placeholder: '请输入型号',
-      rules: [
-        {
-          required: true,
-          min: 5,
-          message: '型号至少为 5 个字符'
-        }
-      ]
-    }, {
-      name: 'dtMachineBornDatetime',
-      label: '出厂日期',
-      type: 'date',
-      placeholder: '请输入名称',
-      rules: [
-        {
-          required: true,
-          min: 5,
-          message: '描述至少为 5 个字符'
-        }
-      ]
-    }, {
-      name: 'strMachineNote',
-      label: '备注',
-      type: 'string',
-      placeholder: '请输入描述',
-      rules: [
-        {
-          required: true,
-          min: 5,
-          message: '描述至少为 5 个字符'
-        }
-      ]
-    }
-  ]
 };
 
 const Feature = FeatureSetConfig(conf);
@@ -301,7 +173,6 @@ export default class App extends Component {
           <ProgressBar active bsStyle="danger" now={10} label={`10%`} key={3} />
         </ProgressBar>
         <Timeline />
-
         <Feature className="Topflex" isUpdate={ this.state.isUpdate } ptitle={seft.state.ptitle} title={seft.state.title} />
       </div>
     )
