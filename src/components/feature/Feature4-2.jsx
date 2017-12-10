@@ -6,8 +6,7 @@ import React, {
   import FormG from 'common/FormG';
   import SubSider from 'components/sider/Sider';
   import FeatureSetConfig from 'common/FeatureSetConfig';
-  import { DoPost, HandleCreateform } from 'server'
-  import config from 'config';
+  import {DoPost, HandleCreateform} from '../../server';
   import { Layout, Tree, Table, Tabs, Button, Card, Menu, Icon, Modal, Popconfirm, Badge, Dropdown } from 'antd'
   const { Header, Footer, Sider, Content } = Layout
   const TreeNode = Tree.TreeNode

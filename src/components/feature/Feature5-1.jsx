@@ -11,40 +11,111 @@ const title = (
 
 let seft
 
+const data = [];
+for (let i = 0; i < 100; i++) {
+  data.push({
+    key: i.toString(),
+    name: `Edrward ${i}`,
+    age: 32,
+    address: `London Park no. ${i}`,
+  });
+}
+
+const EditableCell = ({ editable, value, onChange }) => (
+  <div>
+    {editable
+      ? <Input style={{ margin: '-5px 0' }} value={value} onChange={e => onChange(e.target.value)} />
+      : value
+    }
+  </div>
+);
+
 class Appdetail extends Component {
 
   constructor(props) {
     super(props)
 
-    this.state = {
-      show: false,
-      abc: 'dfg745g',
-      bcd: '4556461',
-      cru_model: 'TSR-900机器人',
-      AppId: '13464646512',
-      Token: '4316581612',
-      updatetime: '2016-10-26'
+     this.columns = [{
+      title: 'name',
+      dataIndex: 'name',
+      width: '25%',
+      render: (text, record) => this.renderColumns(text, record, 'name'),
+    }, {
+      title: 'age',
+      dataIndex: 'age',
+      width: '15%',
+      render: (text, record) => this.renderColumns(text, record, 'age'),
+    }, {
+      title: 'address',
+      dataIndex: 'address',
+      width: '40%',
+      render: (text, record) => this.renderColumns(text, record, 'address'),
+    }, {
+      title: 'operation',
+      dataIndex: 'operation',
+      render: (text, record) => {
+        const { editable } = record;
+        return (
+          <div className="editable-row-operations">
+            {
+              editable ?
+                <span>
+                  <a onClick={() => this.save(record.key)}>Save</a>
+                  <Popconfirm title="Sure to cancel?" onConfirm={() => this.cancel(record.key)}>
+                    <a>Cancel</a>
+                  </Popconfirm>
+                </span>
+                : <a onClick={() => this.edit(record.key)}>Edit</a>
+            }
+          </div>
+        );
+      },
+    }];
+    this.state = { data };
+    this.cacheData = data.map(item => ({ ...item }));
+  }
+  renderColumns(text, record, column) {
+    return (
+      <EditableCell
+        editable={record.editable}
+        value={text}
+        onChange={value => this.handleChange(value, record.key, column)}
+      />
+    );
+  }
+  handleChange(value, key, column) {
+    const newData = [...this.state.data];
+    const target = newData.filter(item => key === item.key)[0];
+    if (target) {
+      target[column] = value;
+      this.setState({ data: newData });
     }
-    seft = this
   }
-
-  componentDidMount () {}
-
-  showModal () {
-    seft.setState({
-      show: true
-    });
+  edit(key) {
+    const newData = [...this.state.data];
+    const target = newData.filter(item => key === item.key)[0];
+    if (target) {
+      target.editable = true;
+      this.setState({ data: newData });
+    }
   }
-
-  hideModal () {
-    seft.setState({
-      show: false
-    });
+  save(key) {
+    const newData = [...this.state.data];
+    const target = newData.filter(item => key === item.key)[0];
+    if (target) {
+      delete target.editable;
+      this.setState({ data: newData });
+      this.cacheData = newData.map(item => ({ ...item }));
+    }
   }
-
-  handleMenuClick(e) {
-    message.info('Click on menu item.');
-    console.log('click', e);
+  cancel(key) {
+    const newData = [...this.state.data];
+    const target = newData.filter(item => key === item.key)[0];
+    if (target) {
+      Object.assign(target, this.cacheData.filter(item => key === item.key)[0]);
+      delete target.editable;
+      this.setState({ data: newData });
+    }
   }
 
   render() {
@@ -58,330 +129,7 @@ class Appdetail extends Component {
     );
 
     return (
-      <div>
-        <Row  gutter={8}
-              style={{
-                margin: '0 0.2%'
-              }}>
-          <Col span={6}>
-            <ul style={{
-              fontWeight: '500',
-              padding: '4% 2%'
-            }}>
-              <li>机台: 80</li>
-              <li style={{
-                color: '#00a854'
-              }}>运行中</li>
-            </ul>
-          </Col>
-          <Col span={6} style={{paddingTop: '10px'}}>
-            <ul style={{
-              padding: '1% 4%'
-            }}>
-              <li style={{
-                fontWeight: '800'
-              }}>{ this.state.cru_model }</li>
-              <li style={{
-                color: '#108ee9',
-                margin: '4% 0px'
-              }}>编号：T2201554587
-              </li>
-              <li style={{
-                margin: '4% 0px',
-                fontWeight: '900'
-              }}>品牌：拓斯达 &nbsp;&nbsp; 型号：TTW1210</li>
-              <li style={{
-                margin: '4% 0px'
-              }}>
-                <Tag color="orange">标签对</Tag>
-                <Tag color="orange">标签对</Tag>
-              </li>
-            </ul>
-          </Col>
-          <Col span={6} style={{paddingTop: '10px'}}>
-            <ul style={{
-              fontWeight: '500',
-              padding: '4% 2%'
-            }}>
-              <li>机台: 80</li>
-              <li style={{
-                color: '#00a854'
-              }}>运行中</li>
-            </ul>
-          </Col>
-          <Col span={6} style={{paddingTop: '18px'}}>
-            <Dropdown overlay={menu}>
-              <Button style={{ marginLeft: 8 }} size={'large'}>
-                发布APP <Icon type="down" />
-              </Button>
-            </Dropdown>
-          </Col>
-        </Row>
-        <Tabs defaultActiveKey="1">
-          <TabPane tab="数据模型" key="1">
-            <Panel header={title} bsStyle="info">
-              <Row  gutter={8}
-                    style={{
-                      margin: '0 0.2%'
-                    }}>
-                <Col span={6}>
-                  <ul style={{
-                    fontSize: 'xx-large',
-                    fontWeight: '500',
-                    padding: '4% 2%'
-                  }}>
-                    <li>机台: 80</li>
-                    <li style={{
-                      fontSize: 'larger',
-                      color: '#00a854'
-                    }}>运行中</li>
-                  </ul>
-                </Col>
-                <Col span={6} style={{paddingTop: '10px'}}>
-                  <ul style={{
-                    padding: '1% 4%'
-                  }}>
-                    <li style={{
-                      fontSize: 'x-large',
-                      fontWeight: '800'
-                    }}>{ this.state.cru_model }</li>
-                    <li style={{
-                      color: '#108ee9',
-                      fontSize: 'medium',
-                      margin: '4% 0px'
-                    }}>编号：T2201554587
-                    </li>
-                    <li style={{
-                      margin: '4% 0px',
-                      fontSize: 'medium',
-                      fontWeight: '900'
-                    }}>品牌：拓斯达 &nbsp;&nbsp; 型号：TTW1210</li>
-                    <li style={{
-                      margin: '4% 0px'
-                    }}>
-                      <Tag color="orange">标签对</Tag>
-                      <Tag color="orange">标签对</Tag>
-                    </li>
-                  </ul>
-                </Col>
-                <Col span={6} style={{paddingTop: '10px'}}>
-                  <ul style={{
-                    fontSize: 'xx-large',
-                    fontWeight: '500',
-                    padding: '4% 2%'
-                  }}>
-                    <li>机台: 80</li>
-                    <li style={{
-                      fontSize: 'larger',
-                      color: '#00a854'
-                    }}>运行中</li>
-                  </ul>
-                </Col>
-                <Col span={6} style={{paddingTop: '18px'}}>
-                  <ul style={{
-                    padding: '1% 4%'
-                  }}>
-                    <li style={{
-                      fontSize: 'medium',
-                      fontWeight: '500'
-                    }}>工单：{ seft.state.AppId }</li>
-                    <li style={{
-                      color: '#108ee9',
-                      fontSize: 'medium',
-                      fontWeight: '500',
-                      margin: '4% 0px'
-                    }}>产品：{ seft.state.Token }</li>
-                    <li style={{
-                      margin: '4% 0px',
-                      fontSize: 'medium',
-                      fontWeight: '900'
-                    }}>
-                      产品：{ seft.state.task_name }
-                    </li>
-                    <li style={{
-                      margin: '4% 0px',
-                      fontSize: 'large'
-                    }}>
-                      预计完成时间: { seft.state.updatetime }
-                    </li>
-                  </ul>
-                </Col>
-              </Row>
-            </Panel>
-          </TabPane>
-          <TabPane tab="PL工程" key="2">
-            <Panel header={title} bsStyle="info">
-              <Row  gutter={8}
-                    style={{
-                      margin: '0 0.2%'
-                    }}>
-                <Col span={6}>
-                  <ul style={{
-                    fontSize: 'xx-large',
-                    fontWeight: '500',
-                    padding: '4% 2%'
-                  }}>
-                    <li>机台: 80</li>
-                    <li style={{
-                      fontSize: 'larger',
-                      color: '#00a854'
-                    }}>运行中</li>
-                  </ul>
-                </Col>
-                <Col span={6} style={{paddingTop: '10px'}}>
-                  <ul style={{
-                    padding: '1% 4%'
-                  }}>
-                    <li style={{
-                      fontSize: 'x-large',
-                      fontWeight: '800'
-                    }}>{ this.state.cru_model }</li>
-                    <li style={{
-                      color: '#108ee9',
-                      fontSize: 'medium',
-                      margin: '4% 0px'
-                    }}>编号：T2201554587
-                    </li>
-                    <li style={{
-                      margin: '4% 0px',
-                      fontSize: 'medium',
-                      fontWeight: '900'
-                    }}>品牌：拓斯达 &nbsp;&nbsp; 型号：TTW1210</li>
-                    <li style={{
-                      margin: '4% 0px'
-                    }}>
-                      <Tag color="orange">标签对</Tag>
-                      <Tag color="orange">标签对</Tag>
-                    </li>
-                  </ul>
-                </Col>
-                <Col span={6} style={{paddingTop: '10px'}}>
-                  <ul style={{
-                    fontSize: 'xx-large',
-                    fontWeight: '500',
-                    padding: '4% 2%'
-                  }}>
-                    <li>机台: 80</li>
-                    <li style={{
-                      fontSize: 'larger',
-                      color: '#00a854'
-                    }}>运行中</li>
-                  </ul>
-                </Col>
-                <Col span={6} style={{paddingTop: '18px'}}>
-                  <ul style={{
-                    padding: '1% 4%'
-                  }}>
-                    <li style={{
-                      fontSize: 'medium',
-                      fontWeight: '500'
-                    }}>工单：{ seft.state.AppId }</li>
-                    <li style={{
-                      color: '#108ee9',
-                      fontSize: 'medium',
-                      fontWeight: '500',
-                      margin: '4% 0px'
-                    }}>产品：{ seft.state.Token }</li>
-                    <li style={{
-                      margin: '4% 0px',
-                      fontSize: 'medium',
-                      fontWeight: '900'
-                    }}>
-                      产品：{ seft.state.task_name }
-                    </li>
-                    <li style={{
-                      margin: '4% 0px',
-                      fontSize: 'large'
-                    }}>
-                      预计完成时间: { seft.state.updatetime }
-                    </li>
-                  </ul>
-                </Col>
-              </Row>
-            </Panel>
-          </TabPane>
-          <TabPane tab="UI工程" key="3">
-            <Panel header={title} bsStyle="info">
-              <Row  gutter={8}
-                    style={{
-                      margin: '0 0.2%'
-                    }}>
-                <Col span={6}>
-                  <ul style={{
-                    fontWeight: '500',
-                    padding: '4% 2%'
-                  }}>
-                    <li>机台: 80</li>
-                    <li style={{
-                      color: '#00a854'
-                    }}>运行中</li>
-                  </ul>
-                </Col>
-                <Col span={6} style={{paddingTop: '10px'}}>
-                  <ul style={{
-                    padding: '1% 4%'
-                  }}>
-                    <li style={{
-                      fontWeight: '800'
-                    }}>{ this.state.cru_model }</li>
-                    <li style={{
-                      color: '#108ee9',
-                      margin: '4% 0px'
-                    }}>编号：T2201554587
-                    </li>
-                    <li style={{
-                      margin: '4% 0px',
-                      fontWeight: '900'
-                    }}>品牌：拓斯达 &nbsp;&nbsp; 型号：TTW1210</li>
-                    <li style={{
-                      margin: '4% 0px'
-                    }}>
-                      <Tag color="orange">标签对</Tag>
-                      <Tag color="orange">标签对</Tag>
-                    </li>
-                  </ul>
-                </Col>
-                <Col span={6} style={{paddingTop: '10px'}}>
-                  <ul style={{
-                    fontWeight: '500',
-                    padding: '4% 2%'
-                  }}>
-                    <li>机台: 80</li>
-                    <li style={{
-                      color: '#00a854'
-                    }}>运行中</li>
-                  </ul>
-                </Col>
-                <Col span={6} style={{paddingTop: '18px'}}>
-                  <ul style={{
-                    padding: '1% 4%'
-                  }}>
-                    <li style={{
-                      fontWeight: '500'
-                    }}>工单：{ seft.state.AppId }</li>
-                    <li style={{
-                      color: '#108ee9',
-                      fontWeight: '500',
-                      margin: '4% 0px'
-                    }}>产品：{ seft.state.Token }</li>
-                    <li style={{
-                      margin: '4% 0px',
-                      fontWeight: '900'
-                    }}>
-                      产品：{ seft.state.task_name }
-                    </li>
-                    <li style={{
-                      margin: '4% 0px',
-                    }}>
-                      预计完成时间: { seft.state.updatetime }
-                    </li>
-                  </ul>
-                </Col>
-              </Row>
-            </Panel>
-          </TabPane>
-        </Tabs>
-      </div>
+      <Table bordered dataSource={this.state.data} columns={this.columns} />
     );
   }
 }
