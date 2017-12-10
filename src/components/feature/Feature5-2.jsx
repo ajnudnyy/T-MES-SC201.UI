@@ -45,7 +45,7 @@ export default class Feature extends Component {
     }
 
     this.columns = [{
-      title: 'name',
+      title: 'name  tag 0.1.1',
       dataIndex: 'name',
       render: (text, record) => this.renderColumns(text, record, 'name'),
     }, {
