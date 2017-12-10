@@ -8,19 +8,13 @@ const SubMenu = Menu.SubMenu;
 
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-
-/* import config from '../config';
-import Header from '../components/header/Header';
-import SubSider from '../components/sider/Sider';
-import Main from '../components/main/Main';
-import Footer from '../components/footer/Footer';
-import Login from '../components/login/Login'; */
 let seft
 import config from '../config';
 import Header from 'components/header/Header';
 import SubSider from 'components/sider/Sider';
 import Main from 'components/main/Main';
 import Footer from 'components/footer/Footer';
+import TopBreadcrumb from 'components/commonComp/TopBreadcrumb';
 import Login from 'components/login/Login';
 
 export default class App extends Component {
@@ -33,13 +27,6 @@ export default class App extends Component {
       siderInfo: config.modelCategory
     }
     seft = this;
-
-    // if(){
-    //
-    // }
-    //   sessionStorage.setItem("useruuid", GetQueryString('useruuid'))
-    //   sessionStorage.setItem("userid", GetQueryString('userid'))
-    //   sessionStorage.setItem("username", GetQueryString('username'))
   }
 
   GetQueryString = (name) => {
@@ -111,6 +98,7 @@ export default class App extends Component {
   }
 
   render() {
+    console.log("我看看参数",this.props);
     let featureId = this.props.params.FeatureId || config.modelCategory.selectedKey;
     //const components = config.main.components;
     const headerInfo = {
@@ -152,13 +140,13 @@ export default class App extends Component {
                       key="1"
                       title={
                         <span>
-                          <Icon type="laptop" />
-                          <span>机台监控</span>
+                          <Icon type="user" />
+                          <span>设备管理</span>
                         </span>}>
                       <Menu.Item key="6">
                         <Link to={'/Feature1-5'}>
                          <Icon type="menu-fold" className="icons"/>
-                         <span>机台群览</span>
+                         <span>自动机车间机台概览</span>
                         </Link>
                       </Menu.Item>
                       <Menu.Item key="7">
@@ -182,7 +170,7 @@ export default class App extends Component {
                           </Link>
                         </Menu.Item>
                         <Menu.Item key="2-2">
-                          <Link to={'/Feature4-1'}>
+                          <Link to={'/Feature4-2'}>
                           <Icon type="file-excel" className="icons"/>
                           <span>生产排程</span>
                           </Link>
@@ -262,18 +250,11 @@ export default class App extends Component {
                           </Link>
                         </Menu.Item>
                     </SubMenu>
-                    
-                    
                   </Menu>
                 </Sider>
                 <Layout style={{ backgroundColor: '#f0f2f5' }}>
                   <Header {...headerInfo} {...featureInfo}/>
-                  <div style={{padding:20,backgroundColor:'white',fontSize:25}}>
-                  <Breadcrumb>
-                    <Breadcrumb.Item>设备管理</Breadcrumb.Item>
-                    <Breadcrumb.Item><a href="">机台监控</a></Breadcrumb.Item>
-                  </Breadcrumb>
-                  </div>
+                  <TopBreadcrumb />
                   <Main {...mainInfo} {...featureInfo} style={{height: '87%'}}/>
                   <Footer />
                 </Layout>

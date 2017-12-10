@@ -18,12 +18,9 @@ const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
 const confirm = Modal.confirm
 let seft
-//dgfdgdfgcvbvcbcv
-
 const conf = {
 
     type: 'tableList',
-
     // 初始化页面的数据 回调函数传入 items 列表
     pageData: function(num, callback){
 

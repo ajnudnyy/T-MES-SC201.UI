@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Icon, Breadcrumb } from 'antd';
-import { Link } from 'dva/router'
+import { Link } from 'dva/router';
 
 const Main = (props) => {
 

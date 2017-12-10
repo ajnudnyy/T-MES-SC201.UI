@@ -281,6 +281,10 @@ const Config = {
         title: '创建订单',
         component: require('./components/feature/Feature4-1')
       },
+      'Feature4-2': {
+        title: '生产排程',
+        component: require('./components/feature/Feature4-2')
+      },
       'Feature5-1': {
         title: '机台监控',
         component: require('./components/feature/Feature5-1')

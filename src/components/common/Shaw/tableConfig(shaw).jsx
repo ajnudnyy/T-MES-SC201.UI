@@ -1,21 +1,16 @@
 // 纯数据展现情况列表
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
-
-import { Table, Form, Select, Input, Row, Col, Button, Icon } from 'antd';
-import { DatePicker, TimePicker, Radio, Switch} from 'antd';
-import { Upload, Modal, message, Spin, Breadcrumb} from 'antd';
-import Sefchsider from '../../components/sider/Sefchsider'
-
+import { Table, Form, Select, Input, Row, Col,
+    Button, Icon, DatePicker, TimePicker, Radio,
+    Switch,Upload, Modal, message, Spin, Breadcrumb } from 'antd';
 import { Link } from 'dva/router';
-
 import Immutable from 'immutable';
 
+import Sefchsider from 'components/sider/Sefchsider'
 import CFormItem from './CreateFormItem';
 import CTextItem from './CreateTextItem';
-
 import Expand from './Expandtable';
-
 // 搜索查询栏form 创建新item-form 更新form
 import UForm from './UpdateForm';
 import CForm from './CreateForm';
@@ -34,7 +29,6 @@ const FeatureSet = (config) => {
       )
     }
 
-    
     console.log('看看传什么config过来了',config);
     let tableFeature = React.createClass({
 

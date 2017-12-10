@@ -28,10 +28,9 @@ import {
   Spin,
   notification,
   Alert
-} from 'antd'
-import {Link} from 'dva/router'
+} from 'antd';
+import {Link} from 'dva/router';
 import Immutable from 'immutable';
-
 import CFormItem from './CreateFormItem';
 import CTextItem from './CreateTextItem';
 // 搜索查询栏form 创建新item-form 更新form
@@ -100,7 +99,7 @@ export default class APP extends Component {
       updateFromShow: false,
       updateFromItem: {},
       total: 0,
-      pageSize: 10,
+      pageSize: 30,
       isSlider: this.props.isSlider,
       isUpdate: this.props.isUpdate,
       config: this.props.config
@@ -205,6 +204,20 @@ export default class APP extends Component {
 
       return columns;
 
+  }
+  //查询回调
+  handleRetrieve= (info)=>{
+    const self = this;
+    self.setState({
+      loading: true
+    })
+
+    self.state.config.Retrieve(info, function(list){
+      self.setState({
+        loading: false,
+        resultList: list
+      })
+    })
   }
 
   getpageData = (num) => {
