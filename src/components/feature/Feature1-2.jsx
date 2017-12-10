@@ -15,7 +15,7 @@ const table_conf = {
     // callback 组件数据的回调函数(接受列表数据参数)
     initData: function(callback){
         Reqwest({
-            url: '/api/example2',
+            url: '/api/test master',
             data: {},
             type: 'json',
             success: function (data) {
